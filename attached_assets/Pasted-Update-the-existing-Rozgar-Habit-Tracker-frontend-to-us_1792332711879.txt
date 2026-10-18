@@ -1,0 +1,85 @@
+Update the existing Rozgar Habit Tracker frontend to use a premium, minimal dark-mode design. Treat this as a visual redesign of the existing app, not a rebuild.
+
+## 1. Design direction
+Create a calm, modern, minimal aesthetic inspired by high-quality productivity apps. The app should feel sophisticated, focused, and comfortable for everyday use.
+
+Use dark mode throughout all screens. Avoid excessive gradients, neon colors, glassmorphism, bright backgrounds, oversized cards, and unnecessary decoration.
+
+## 2. Color palette
+Apply these colors consistently:
+
+- Main background: #0B0D10
+- Secondary background: #11151B
+- Card background: #151A22
+- Elevated surfaces: #1B222C
+- Primary blue: #5B8CFF
+- Hover blue: #78A4FF
+- Subtle blue tint: #182743
+- Primary text: #F3F5F8
+- Secondary text: #A1AAB8
+- Muted text: #707A89
+- Borders: #252D38
+- Success green: #55C99A
+- Error red: #F07178
+
+Use blue selectively for primary buttons, active navigation, progress indicators, and interactive elements. Use green only for successful completion states. Keep most of the interface dark and neutral.
+
+## 3. Layout and visual style
+- Use a clean sans-serif font such as Inter.
+- Use restrained corner radii of approximately 10–14px.
+- Prefer subtle one-pixel borders over heavy shadows.
+- Maintain consistent spacing and alignment.
+- Use simple Lucide icons.
+- Keep typography readable with clear heading hierarchy.
+- Use restrained animations and clear hover and focus states.
+- Avoid unnecessary illustrations and decorative elements.
+- Preserve the Rozgar wordmark and existing functionality.
+
+## 4. Dashboard
+Keep the current dashboard structure, but restyle it for dark mode.
+
+Include:
+- Rozgar wordmark in the header.
+- Current date and a subtle greeting.
+- Today's habits section.
+- Habit completion checkboxes.
+- A compact daily progress indicator.
+- Weekly consistency overview.
+- A prominent but restrained blue Add Habit button.
+- Supportive missed-day recovery messaging.
+
+Habit rows should use dark surfaces with subtle borders. Completed habits should have a clear blue checkmark and slightly muted text, without making them difficult to read.
+
+Keep the dashboard spacious and uncluttered. Avoid turning every section into a separate large card.
+
+## 5. Other screens
+Apply the same design system to:
+- Welcome and onboarding.
+- Sign up and login.
+- Add and edit habit forms.
+- My Habits.
+- Progress and seven-day history.
+- Settings.
+- Dialogs, dropdowns, validation errors, and empty states.
+
+Ensure text fields, menus, modals, and form controls also use dark surfaces. Do not leave any screen with a bright white background.
+
+## 6. Navigation and responsiveness
+- Desktop: restrained dark sidebar or top navigation.
+- Mobile: compact dark bottom navigation.
+- Use blue to indicate the active navigation item.
+- Ensure all screens remain usable on mobile, tablet, and desktop.
+- Maintain keyboard accessibility and visible focus indicators.
+
+## 7. Important implementation rules
+- Modify the existing code and reusable styling tokens rather than creating a new application.
+- Preserve existing routes, components, form behavior, and state management.
+- Do not remove or disable any working functionality.
+- Do not implement the backend in this task.
+- Do not introduce unnecessary dependencies.
+- If the project already uses a theme system, update the existing theme rather than adding a competing one.
+
+## 8. Final checks
+Verify that all existing screens use the dark palette consistently, that text remains readable, and that buttons, forms, checkboxes, progress indicators, and navigation retain their existing behavior.
+
+Deliver a cohesive, premium dark-mode version of Rozgar with minimal aesthetics and subtle blue accents.
