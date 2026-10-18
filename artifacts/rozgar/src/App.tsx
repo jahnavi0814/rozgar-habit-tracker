@@ -95,7 +95,7 @@ function HabitEditor({ initial, onSave, onClose }: { initial?: Habit; onSave: (h
 function HabitRow({ habit, onToggle, onEdit, onPause, onDelete, manage = false }: { habit: Habit; onToggle: (id: string) => void; onEdit: (habit: Habit) => void; onPause: (id: string) => void; onDelete: (id: string) => void; manage?: boolean }) {
   const [menu, setMenu] = useState(false);
   return <article className={`habit-row ${habit.completedToday ? 'is-done' : ''}`} data-testid={`habit-row-${habit.id}`}>
-    <button className={`check-button ${habit.completedToday ? 'checked' : ''}`} onClick={() => onToggle(habit.id)} aria-label={`${habit.completedToday ? 'Undo completion of' : 'Mark'} ${habit.name}`} aria-pressed={habit.completedToday} data-testid={`button-check-${habit.id}`}>{habit.completedToday && <Check size={17} strokeWidth={2.6} />}</button>
+    <button id={`habit-check-${habit.id}`} className={`check-button ${habit.completedToday ? 'checked' : ''}`} onClick={() => onToggle(habit.id)} aria-label={`${habit.completedToday ? 'Undo completion of' : 'Mark'} ${habit.name}`} aria-pressed={habit.completedToday} data-testid={`button-check-${habit.id}`}>{habit.completedToday && <Check size={17} strokeWidth={2.6} />}</button>
     <div className="habit-copy"><div className="habit-title-line"><h3>{habit.name}</h3>{!habit.isActive && <span className="tag paused-tag">Paused</span>}</div>{habit.description && <p>{habit.description}</p>}<div className="habit-meta"><span>{habit.frequency === 'daily' ? 'Every day' : habit.weekdays.map((n) => weekdayLabels[n]).join(', ')}</span>{habit.reminderTime && <><span className="meta-dot">·</span><span><Clock3 size={12} /> {formatTime(habit.reminderTime)}</span></>}</div></div>
     <div className="habit-row-actions">{!manage && <span className={`check-state ${habit.completedToday ? 'state-done' : ''}`}>{habit.completedToday ? 'Done for today' : 'A little step'}</span>}
       <div className="menu-wrap"><button className="icon-button more-button" aria-label={`More options for ${habit.name}`} aria-expanded={menu} onClick={() => setMenu(!menu)} data-testid={`button-more-${habit.id}`}><MoreHorizontal size={19} /></button>{menu && <div className="action-menu" role="menu"><button role="menuitem" onClick={() => { onEdit(habit); setMenu(false); }} data-testid={`button-edit-${habit.id}`}><Pencil size={15} /> Edit</button><button role="menuitem" onClick={() => { onPause(habit.id); setMenu(false); }} data-testid={`button-pause-${habit.id}`}><Pause size={15} /> {habit.isActive ? 'Pause' : 'Resume'}</button><button role="menuitem" className="delete-option" onClick={() => { onDelete(habit.id); setMenu(false); }} data-testid={`button-delete-${habit.id}`}><Trash2 size={15} /> Delete</button></div>}</div>
@@ -114,11 +114,19 @@ function TodayPage({ habits, setHabits, editHabit, startAdd }: { habits: Habit[]
   const toggle = (id: string) => setHabits((items) => items.map((habit) => habit.id === id ? { ...habit, completedToday: !habit.completedToday } : habit));
   const togglePause = (id: string) => setHabits((items) => items.map((habit) => habit.id === id ? { ...habit, isActive: !habit.isActive } : habit));
   const remove = (id: string) => { if (window.confirm('Delete this habit from your list?')) setHabits((items) => items.filter((habit) => habit.id !== id)); };
+  const continueToday = () => {
+    const nextHabit = active.find((habit) => !habit.completedToday) ?? active[0];
+    const target = (nextHabit && document.getElementById(`habit-check-${nextHabit.id}`))
+      ?? document.getElementById('today-empty-action')
+      ?? document.getElementById('today-habits');
+    target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.requestAnimationFrame(() => target?.focus({ preventScroll: true }));
+  };
   return <div className="page-wrap">
     <div className="welcome-line"><div><div className="date-line"><CalendarDays size={15} /> {dateLabel}</div><h1>A fresh day, at your pace.</h1><p>There is no perfect way to begin. Just begin where you are.</p></div><div className="day-mark"><span>YOUR DAY</span><strong>{today.toLocaleDateString('en-IN', { day: '2-digit' })}</strong><small>{today.toLocaleDateString('en-IN', { month: 'short' })}</small></div></div>
     <div className="today-grid">
-      <section className="today-main">
-        {active.length === 0 ? <div className="empty-card"><div className="empty-art"><Leaf size={25} /></div><h2>Leave a little space for a routine.</h2><p>Start with one small habit that feels kind to your day. You can always add more later.</p><button className="button button-primary" onClick={startAdd} data-testid="button-empty-add">Add your first habit <ArrowRight size={16} /></button></div> : <>
+      <section className="today-main" id="today-habits" tabIndex={-1}>
+        {active.length === 0 ? <div className="empty-card"><div className="empty-art"><Leaf size={25} /></div><h2>{habits.length === 0 ? 'Start with one small habit.' : 'Nothing is scheduled for today.'}</h2><p>{habits.length === 0 ? 'Choose a routine that feels kind to your day. You can always add more later.' : 'Your current routines are for other days. Take today as it comes, or add a habit that fits.'}</p><div className="empty-actions">{habits.length > 0 && <Link id="today-empty-action" href="/habits" className="button button-outline" data-testid="link-empty-view-habits">View my habits</Link>}<button id={habits.length === 0 ? 'today-empty-action' : undefined} className="button button-primary" onClick={startAdd} data-testid="button-empty-add">{habits.length === 0 ? 'Add your first habit' : 'Add a habit'} <ArrowRight size={16} /></button></div></div> : <>
           <div className="section-heading"><div><div className="eyebrow">TODAY'S PRACTICE</div><h2>Your habits <span className="count-pill">{active.length}</span></h2></div><button className="button button-outline add-habit" onClick={startAdd} data-testid="button-add-habit"><Plus size={17} /> Add habit</button></div>
           <div className="habit-list">{active.map((habit) => <HabitRow key={habit.id} habit={habit} onToggle={toggle} onEdit={editHabit} onPause={togglePause} onDelete={remove} />)}</div>
           {complete === active.length && active.length > 0 && <div className="all-done" data-testid="status-all-done"><div><Check size={18} /></div><span>That’s everything for today. Let it be enough.</span></div>}
@@ -126,12 +134,12 @@ function TodayPage({ habits, setHabits, editHabit, startAdd }: { habits: Habit[]
       </section>
       <aside className="today-aside">
         <section className="progress-card"><div className="card-title-row"><div><div className="eyebrow">A MOMENT FOR YOU</div><h2>Today's rhythm</h2></div><Sparkles size={18} className="sparkle" /></div>
-          <div className="rhythm-number"><strong>{complete}</strong><span>of {active.length} habits</span></div>
+          <div className="rhythm-number"><strong>{active.length ? complete : '—'}</strong><span>{active.length ? `of ${active.length} habits` : 'none scheduled today'}</span></div>
           <div className="progress-track" role="progressbar" aria-label="Today's completed habits" aria-valuenow={complete} aria-valuemin={0} aria-valuemax={active.length || 1}><span style={{ width: `${active.length ? (complete / active.length) * 100 : 0}%` }} /></div>
           <p className="progress-caption">{active.length === 0 ? 'Your next small step can start here.' : complete === 0 ? 'One small action is a good place to start.' : `${incomplete} ${incomplete === 1 ? 'step' : 'steps'} left, if today has room for them.`}</p>
-          <div className="today-divider" /><div className="today-stat"><span>Today’s effort</span><strong>{active.length ? Math.round((complete / active.length) * 100) : 0}%</strong></div>
+          <div className="today-divider" /><div className="today-stat"><span>Today’s effort</span><strong>{active.length ? `${Math.round((complete / active.length) * 100)}%` : '—'}</strong></div>
         </section>
-        <section className="recovery-card"><div className="recovery-icon"><Heart size={17} /></div><div className="eyebrow">A NOTE TO COME BACK TO</div><h3>Missed a day? You’re still here.</h3><p>Habits are built over time, not in an unbroken line. There’s no catching up to do. Start fresh with the next small thing.</p><button className="text-action" onClick={() => document.querySelector('[data-testid="button-check-' + (active.find(h => !h.completedToday)?.id ?? active[0]?.id) + '"]')?.scrollIntoView({ behavior: 'smooth', block: 'center' })} data-testid="button-continue-today">Continue today <ArrowRight size={15} /></button></section>
+        <section className="recovery-card"><div className="recovery-icon"><Heart size={17} /></div><div className="eyebrow">A NOTE TO COME BACK TO</div><h3>Missed a day? You’re still here.</h3><p>Habits are built over time, not in an unbroken line. There’s no catching up to do. Start fresh with the next small thing.</p><button className="text-action" onClick={continueToday} data-testid="button-continue-today">Continue today <ArrowRight size={15} /></button></section>
         <div className="privacy-note"><div className="privacy-lock"><Check size={13} /></div><span>Your progress lives in this session only.<br />Nothing is synced or permanently saved.</span></div>
       </aside>
     </div>
@@ -193,7 +201,7 @@ function SettingsPage() {
   </div>;
 }
 
-function WelcomePage() {
+function WelcomePage({ onComplete }: { onComplete: (selectedHabits: string[]) => void }) {
   const [step, setStep] = useState(0);
   const [chosen, setChosen] = useState<string[]>([]);
   const ideas = ['Move a little', 'Read something', 'Drink more water', 'Make time to pause', 'Write a few lines'];
@@ -201,7 +209,7 @@ function WelcomePage() {
   return <div className="welcome-page"><Link href="/" className="brand welcome-brand" data-testid="link-welcome-logo"><span className="brand-mark"><Leaf size={19} /></span><span>rozgar</span></Link><div className="welcome-card">
     <div className="welcome-progress"><span style={{ width: step ? '100%' : '50%' }} /></div>
     {step === 0 ? <><div className="welcome-symbol"><Leaf size={25} /></div><div className="eyebrow">A SOFTER WAY TO BUILD ROUTINES</div><h1>Build habits that fit your life.</h1><p>Stay consistent, one day at a time.</p><div className="welcome-points"><span><Check size={15} /> Start small and make it yours</span><span><Check size={15} /> Pick up again whenever you’re ready</span><span><Check size={15} /> Your progress is yours to shape</span></div><button className="button button-primary welcome-next" onClick={() => setStep(1)} data-testid="button-welcome-begin">Get started <ArrowRight size={16} /></button><Link className="welcome-login-link" href="/sign-in" data-testid="link-welcome-sign-in">I already have an account</Link><p className="welcome-session-note">This prototype keeps choices in your current session only.</p></> :
-      <><div className="eyebrow">STEP 2 OF 2</div><h1>What would feel good to begin?</h1><p>Pick any that speak to you. You can change your mind later.</p><div className="idea-list">{ideas.map((idea) => <button key={idea} onClick={() => toggle(idea)} className={`idea-item ${chosen.includes(idea) ? 'chosen' : ''}`} aria-pressed={chosen.includes(idea)} data-testid={`button-idea-${idea.toLowerCase().replaceAll(' ', '-')}`}><span className="idea-check">{chosen.includes(idea) && <Check size={15} />}</span>{idea}</button>)}</div><div className="welcome-actions"><button className="button button-quiet" onClick={() => setStep(0)} data-testid="button-welcome-back"><ArrowLeft size={15} /> Back</button><Link className="button button-primary" href="/habits" data-testid="link-welcome-habits">Continue to habits <ArrowRight size={16} /></Link></div><p className="welcome-session-note">Your selections are a starting point, not a commitment.</p></>}
+      <><div className="eyebrow">STEP 2 OF 2</div><h1>What would feel good to begin?</h1><p>Pick any that speak to you. You can change your mind later.</p><div className="idea-list">{ideas.map((idea) => <button key={idea} onClick={() => toggle(idea)} className={`idea-item ${chosen.includes(idea) ? 'chosen' : ''}`} aria-pressed={chosen.includes(idea)} data-testid={`button-idea-${idea.toLowerCase().replaceAll(' ', '-')}`}><span className="idea-check">{chosen.includes(idea) && <Check size={15} />}</span>{idea}</button>)}</div><div className="welcome-actions"><button className="button button-quiet" onClick={() => setStep(0)} data-testid="button-welcome-back"><ArrowLeft size={15} /> Back</button><button type="button" className="button button-primary" onClick={() => onComplete(chosen)} data-testid="button-welcome-finish">Continue to habits <ArrowRight size={16} /></button></div><Link className="welcome-login-link" href="/sign-up" data-testid="link-welcome-sign-up">Create an account</Link><p className="welcome-session-note">Selected ideas are added to this session only. You can edit them anytime.</p></>}
     </div><Link href="/" className="welcome-skip" data-testid="link-welcome-skip">Skip for now</Link></div>;
 }
 
@@ -243,13 +251,29 @@ function NotFound() { return <AppShell><div className="page-wrap not-found"><div
 
 function AppRouter() {
   const [habits, setHabits] = useState<Habit[]>(seedHabits);
+  const [, setLocation] = useLocation();
   const [editor, setEditor] = useState<{ open: boolean; habit?: Habit }>({ open: false });
   const openNew = () => setEditor({ open: true });
   const openEdit = (habit: Habit) => setEditor({ open: true, habit });
   const save = (habit: Habit) => { setHabits(items => editor.habit ? items.map(item => item.id === habit.id ? habit : item) : [...items, habit]); setEditor({ open: false }); };
+  const completeWelcome = (selectedHabits: string[]) => {
+    const additions: Habit[] = selectedHabits.map((name, index) => ({
+      id: `welcome-${Date.now()}-${index}`,
+      name,
+      frequency: 'daily',
+      weekdays: [],
+      isActive: true,
+      completedToday: false,
+    }));
+    setHabits((items) => {
+      const existingNames = new Set(items.map((habit) => habit.name.trim().toLowerCase()));
+      return [...items, ...additions.filter((habit) => !existingNames.has(habit.name.trim().toLowerCase()))];
+    });
+    setLocation('/habits');
+  };
   return <>
     <Switch>
-    <Route path="/welcome"><WelcomePage /></Route>
+    <Route path="/welcome"><WelcomePage onComplete={completeWelcome} /></Route>
     <Route path="/sign-up"><AuthPage mode="sign-up" /></Route>
     <Route path="/sign-in"><AuthPage mode="sign-in" /></Route>
     <Route path="/"><AppShell><TodayPage habits={habits} setHabits={setHabits} editHabit={openEdit} startAdd={openNew} /></AppShell></Route>
