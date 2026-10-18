@@ -67,79 +67,80 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* LIGHT MODE */
+/* DARK MODE */
 :root {
-  --button-outline: rgba(0, 0, 0, 0.1);
-  --badge-outline: rgba(0, 0, 0, 0.05);
+  color-scheme: dark;
+  --button-outline: rgba(255, 255, 255, 0.1);
+  --badge-outline: rgba(255, 255, 255, 0.05);
 
   /* Automatic computation of border around primary / danger buttons */
   --opaque-button-border-intensity: -8; /* In terms of percentages */
 
   /* Backgrounds applied on top of other backgrounds when hovered/active */
-  --elevate-1: rgba(0, 0, 0, 0.03);
-  --elevate-2: rgba(0, 0, 0, 0.08);
+  --elevate-1: rgba(255, 255, 255, 0.04);
+  --elevate-2: rgba(255, 255, 255, 0.09);
 
-  --background: 220 43% 98%;
+  --background: 216 47% 5%;
 
-  --foreground: 222 22% 8%;
+  --foreground: 216 24% 96%;
 
-  --border: 220 17% 91%;
+  --border: 215 20% 18%;
 
-  --card: 0 0% 100%;
+  --card: 216 24% 11%;
 
-  --card-foreground: 222 22% 8%;
+  --card-foreground: 216 24% 96%;
 
-  --card-border: 220 17% 91%;
+  --card-border: 215 20% 18%;
 
-  --sidebar: 0 0% 100%;
+  --sidebar: 216 23% 9%;
 
-  --sidebar-foreground: 222 22% 8%;
+  --sidebar-foreground: 216 24% 96%;
 
-  --sidebar-border: 220 17% 91%;
+  --sidebar-border: 215 20% 18%;
 
-  --sidebar-primary: 221 83% 53%;
+  --sidebar-primary: 222 100% 68%;
 
   --sidebar-primary-foreground: 0 0% 100%;
 
-  --sidebar-accent: 214 100% 94%;
+  --sidebar-accent: 217 47% 18%;
 
-  --sidebar-accent-foreground: 221 73% 30%;
+  --sidebar-accent-foreground: 216 24% 96%;
 
-  --sidebar-ring: 221 83% 53%;
+  --sidebar-ring: 222 100% 68%;
 
-  --popover: 0 0% 100%;
+  --popover: 219 24% 14%;
 
-  --popover-foreground: 222 22% 8%;
+  --popover-foreground: 216 24% 96%;
 
-  --popover-border: 220 17% 91%;
+  --popover-border: 215 20% 18%;
 
-  --primary: 221 83% 53%;
+  --primary: 222 100% 68%;
 
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 214 100% 94%;
+  --secondary: 219 24% 14%;
 
-  --secondary-foreground: 221 73% 30%;
+  --secondary-foreground: 216 24% 96%;
 
-  --muted: 220 28% 96%;
+  --muted: 216 23% 9%;
 
-  --muted-foreground: 220 7% 48%;
+  --muted-foreground: 217 14% 68%;
 
-  --accent: 214 100% 94%;
+  --accent: 217 47% 18%;
 
-  --accent-foreground: 221 73% 30%;
+  --accent-foreground: 216 24% 96%;
 
-  --destructive: 0 67% 48%;
+  --destructive: 357 81% 69%;
 
   --destructive-foreground: 0 0% 100%;
 
-  --input: 220 17% 91%;
-  --ring: 221 83% 53%;
-  --chart-1: 221 83% 53%;
-  --chart-2: 158 70% 30%;
-  --chart-3: 220 25% 45%;
-  --chart-4: 203 70% 75%;
-  --chart-5: 39 70% 60%;
+  --input: 215 20% 18%;
+  --ring: 222 100% 68%;
+  --chart-1: 222 100% 68%;
+  --chart-2: 153 51% 56%;
+  --chart-3: 217 14% 68%;
+  --chart-4: 215 24% 14%;
+  --chart-5: 357 81% 69%;
 
   --app-font-sans: 'DM Sans', sans-serif;
   --app-font-serif: Georgia, serif;
@@ -433,26 +434,34 @@
   }
 }
 
-/* Rozgar — soft structure, calm blue, and room to begin again. */
+/* Rozgar — restrained dark surfaces with focused blue accents. */
 :root {
-  color-scheme: light;
-  --blue: #2563eb;
-  --navy: #172554;
-  --pale-blue: #f4f8ff;
-  --light-blue: #dbeafe;
-  --ink: #111318;
-  --charcoal: #272b33;
-  --warm: #f5f4f0;
-  --muted-copy: #737985;
-  --line: #e5e7eb;
-  --green: #16845b;
+  color-scheme: dark;
+  --blue: #5B8CFF;
+  --blue-hover: #78A4FF;
+  --navy: #F3F5F8;
+  --pale-blue: #0B0D10;
+  --light-blue: #182743;
+  --ink: #F3F5F8;
+  --charcoal: #A1AAB8;
+  --warm: #11151B;
+  --muted-copy: #A1AAB8;
+  --muted-text: #707A89;
+  --line: #252D38;
+  --surface: #151A22;
+  --surface-secondary: #11151B;
+  --surface-elevated: #1B222C;
+  --blue-tint: #182743;
+  --success: #55C99A;
+  --error: #F07178;
+  --green: #55C99A;
   --display: 'Manrope', 'DM Sans', sans-serif;
 }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; min-height: 100dvh; background: var(--pale-blue); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 14px; }
 button, input, textarea { font: inherit; }
 button { color: inherit; }
-button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid #83aafc; outline-offset: 3px; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 a { color: inherit; text-decoration: none; }
 .app-shell { min-height: 100dvh; }
 .sidebar { width: 244px; height: 100dvh; position: fixed; inset: 0 auto 0 0; display: flex; flex-direction: column; padding: 30px 20px 18px; background: #fff; border-right: 1px solid var(--line); z-index: 5; }
@@ -824,3 +833,151 @@ h1, h2, h3, p { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Dark palette applied across the existing Rozgar screens and controls. */
+.sidebar, .topbar, .mobile-nav { background: var(--surface-secondary); border-color: var(--line); }
+.sidebar-note, .day-mark, .habit-list, .progress-card, .week-card, .history-card,
+.settings-section, .dialog, .welcome-card, .auth-panel {
+  background: var(--surface);
+  border-color: var(--line);
+}
+.sidebar-note { background: var(--surface-secondary); }
+.topbar { background: rgba(17, 21, 27, .94); }
+.status-dot { background: var(--blue); }
+.nav-link { color: var(--muted-copy); }
+.nav-link:hover, .icon-button:hover, .action-menu button:hover,
+.button-outline:hover, .button-quiet:hover, .password-toggle:hover {
+  background: var(--surface-elevated);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.nav-link.active { background: var(--blue-tint); color: var(--blue); }
+.sidebar-note p, .section-heading h2, .card-title-row h2, .rhythm-number strong,
+.today-stat strong, .recovery-card h3, .empty-card h2, .week-card-top h2,
+.history-heading h2, .progress-summary h3, .settings-section-head h2,
+.dialog-head h2, .welcome-card h1, .visual-copy h2, .auth-form-side h1 {
+  color: var(--ink);
+}
+.sidebar-note span, .today-label, .date-line, .welcome-line > div > p,
+.page-heading > div > p, .day-mark span, .day-mark small, .count-pill,
+.habit-copy p, .habit-meta, .check-state, .rhythm-number span, .progress-caption,
+.today-stat, .recovery-card p, .privacy-note, .empty-card p, .tab-switch button,
+.quiet-footnote, .week-percent span, .week-name, .week-legend, .history-heading,
+.history-empty p, .data-note, .settings-section-head p, .setting-toggle-row div > span,
+.settings-info, .settings-callout p, .welcome-card > p, .welcome-points,
+.welcome-session-note, .welcome-skip, .auth-intro, .auth-password-hint,
+.form-status, .auth-switch, .auth-back a, .auth-footer, .not-found p {
+  color: var(--muted-copy);
+}
+.nav-caption, .eyebrow { color: var(--muted-text); }
+.brand-mark, .note-icon, .recovery-icon, .empty-art, .summary-icon,
+.settings-icon, .welcome-symbol, .avatar, .top-avatar {
+  background: var(--blue-tint);
+  color: var(--blue);
+}
+.avatar, .top-avatar { color: var(--blue-hover); }
+.habit-list, .habit-row, .today-divider, .week-legend, .history-line-segment,
+.settings-section-head, .setting-toggle-row, .dialog-actions, .auth-back {
+  border-color: var(--line);
+}
+.habit-row { background: var(--surface); }
+.habit-copy h3, .week-date, .history-empty strong, .setting-toggle-row strong,
+.field-label, .form-input, .action-menu button, .auth-form-side {
+  color: var(--ink);
+}
+.is-done .habit-copy h3, .check-state, .meta-dot, .week-status.untracked-label {
+  color: var(--muted-text);
+}
+.check-button, .button-outline, .tab-switch button.selected, .action-menu,
+.form-input, .choice, .day-chip, .idea-item, .all-done > div {
+  background: var(--surface-elevated);
+  border-color: var(--line);
+}
+.check-button { color: var(--ink); }
+.button-outline { color: var(--muted-copy); }
+.button-primary:hover { background: var(--blue-hover); border-color: var(--blue-hover); }
+.button-outline:hover, .button-quiet:hover { background: var(--surface-elevated); }
+.action-menu { box-shadow: 0 10px 28px rgba(0, 0, 0, .32); }
+.action-menu button { color: var(--muted-copy); }
+.action-menu .delete-option, .form-error { color: var(--error); }
+.all-done { color: var(--success); background: rgba(85, 201, 154, .08); border-color: rgba(85, 201, 154, .22); }
+.all-done > div { color: var(--success); }
+.progress-track, .tab-switch, .paused-tag, .week-mark {
+  background: var(--surface-elevated);
+}
+.recovery-card, .progress-summary, .settings-info, .settings-callout,
+.auth-visual, .preview-warning {
+  background: var(--blue-tint);
+  border-color: var(--line);
+}
+.recovery-card, .progress-summary { background: var(--surface); }
+.settings-info, .settings-callout, .preview-warning { background: var(--surface-secondary); }
+.recovery-icon, .summary-icon, .settings-icon, .welcome-symbol { background: var(--surface-elevated); }
+.sparkle { color: var(--blue-hover); }
+.privacy-lock { background: var(--surface-elevated); color: var(--muted-copy); }
+.empty-card { background: var(--surface-secondary); border-color: var(--line); }
+.tab-switch button { color: var(--muted-copy); }
+.tab-switch button.selected { color: var(--ink); box-shadow: none; }
+.tag, .paused-tag { color: var(--muted-copy); }
+.week-day { background: var(--surface-secondary); border-color: var(--line); }
+.week-day.current-day { background: var(--blue-tint); border-color: var(--blue); }
+.week-date { color: var(--ink); }
+.week-mark { color: var(--muted-copy); }
+.mark-done { background: var(--success); color: var(--surface-secondary); }
+.mark-today { background: var(--surface-elevated); }
+.mark-today span { background: var(--blue); }
+.mark-untracked { background: transparent; border-color: var(--line); color: var(--muted-text); }
+.session-tag { color: var(--muted-copy); background: var(--surface-elevated); }
+.week-status { color: var(--muted-copy); }
+.current-day .week-status { color: var(--blue-hover); }
+.mark-done + .week-status { color: var(--success); }
+.legend-dot.recorded { background: var(--blue); }
+.legend-dot.untracked { border-color: var(--muted-text); }
+.progress-summary { border-color: var(--line); }
+.history-point { background: var(--surface); border-color: var(--muted-text); }
+.history-point.filled { background: var(--blue); border-color: var(--blue); }
+.history-line-segment { background: var(--line); }
+.settings-section-head, .setting-toggle-row { border-color: var(--line); }
+.settings-form .form-input, .form-input { background: var(--surface-elevated); border-color: var(--line); }
+.form-input::placeholder { color: var(--muted-text); }
+.form-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91, 140, 255, .16); }
+.optional, .time-input-wrap > svg { color: var(--muted-text); }
+.toggle { background: var(--surface-elevated); }
+.toggle.on { background: var(--blue); }
+.settings-message { color: var(--success); }
+.settings-callout { border-left-color: var(--blue); }
+.modal-backdrop { background: rgba(0, 0, 0, .72); }
+.dialog { box-shadow: 0 18px 60px rgba(0, 0, 0, .48); }
+.choice, .day-chip, .idea-item { color: var(--muted-copy); }
+.welcome-progress { background: var(--surface-elevated); }
+.welcome-points svg { color: var(--blue); }
+.choice.selected, .day-chip.selected, .idea-item.chosen {
+  background: var(--blue-tint);
+  border-color: var(--blue);
+  color: var(--ink);
+}
+.idea-check { border-color: var(--muted-text); }
+.chosen .idea-check { background: var(--blue); border-color: var(--blue); color: var(--surface-secondary); }
+.auth-visual { background: var(--surface-secondary); }
+.visual-circle { border-color: rgba(91, 140, 255, .18); }
+.visual-copy .eyebrow, .visual-copy p, .visual-foot,
+.preview-warning, .preview-warning svg, .password-toggle, .auth-back a {
+  color: var(--muted-copy);
+}
+.preview-error { color: var(--error); background: rgba(240, 113, 120, .08); border-color: rgba(240, 113, 120, .28); }
+.account-welcome-link, .welcome-login-link, .auth-switch a { color: var(--blue-hover); }
+.text-action { color: var(--blue); }
+.text-action:hover, .welcome-skip:hover, .auth-back a:hover { color: var(--blue-hover); }
+.mobile-brand { color: var(--ink); }
+.mobile-nav { background: rgba(17, 21, 27, .97); border-color: var(--line); }
+.mobile-nav-item { color: var(--muted-copy); }
+.mobile-nav-item.active { color: var(--blue); }
+.sidebar-note, .day-mark, .habit-list, .progress-card, .recovery-card, .week-card,
+.history-card, .settings-section, .settings-info, .settings-callout {
+  border-radius: 12px;
+}
+.dialog, .welcome-card, .auth-panel { border-radius: 14px; }
+.habit-list, .progress-card, .recovery-card, .week-card, .history-card,
+.settings-section, .welcome-card, .auth-panel { box-shadow: none; }
+.dialog { box-shadow: 0 14px 40px rgba(0, 0, 0, .36); }
+.visual-circle { display: none; }
