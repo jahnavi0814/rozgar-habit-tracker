@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Rozgar"
+description = "A calm, responsive daily habit tracker that helps people build sustainable routines, check in easily, and restart without guilt. This first version is a frontend prototype with temporary mock state and no connected authentication or database."
+version = "1.0.0"
+id = "artifacts/rozgar"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23764
+
+[services.development]
+run = "pnpm --filter @workspace/rozgar run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/rozgar", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/rozgar/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23764"
+BASE_PATH = "/"

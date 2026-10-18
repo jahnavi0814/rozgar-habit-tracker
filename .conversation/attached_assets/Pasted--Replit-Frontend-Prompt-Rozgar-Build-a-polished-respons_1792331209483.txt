@@ -1,0 +1,246 @@
+# Replit Frontend Prompt — Rozgar
+
+Build a polished, responsive web app frontend named **Rozgar**, a daily habit consistency tracker that helps people build sustainable routines and get back on track when they miss a day.
+
+## 1. Product Vision
+
+Rozgar helps users stay consistent with daily habits such as studying, reading, exercising, drinking water, meditation, and personal development.
+
+The experience should feel simple, motivating, modern, and culturally familiar to Indian users without relying on stereotypical Indian visual elements.
+
+**Core product principle:** Consistency over perfection. Missing a day should never make users feel like they have failed.
+
+For this task, focus on building the frontend first, with realistic mock data if the backend is not yet connected. Keep the code organized so a real database and authentication can be integrated later.
+
+## 2. Brand Identity and Visual Design
+
+Create a clean, premium, minimal visual identity for Rozgar.
+
+### Color palette
+
+Use these colors consistently throughout the application:
+
+- Primary blue: `#2563EB`
+- Deep navy: `#172554`
+- Light blue: `#DBEAFE`
+- Very pale blue: `#F4F8FF`
+- White: `#FFFFFF`
+- Near-black: `#111318`
+- Charcoal: `#272B33`
+- Warm neutral background: `#F5F4F0`
+- Muted grey: `#737985`
+- Border grey: `#E5E7EB`
+- Success green: `#16845B`
+
+Use blue for primary actions, active states, progress indicators, and selected navigation. Use white and warm neutrals for surfaces. Use black and charcoal for readable typography.
+
+Avoid excessive gradients, neon colors, heavy shadows, and overly colorful cards.
+
+### Design style
+
+- Modern Indian startup aesthetic.
+- Minimal, calm, and premium.
+- Generous whitespace and clear visual hierarchy.
+- Rounded corners around 12–16px.
+- Subtle borders and soft shadows only when useful.
+- Use a modern sans-serif font such as Inter or a similar highly readable font.
+- Use simple Lucide icons.
+- Keep the design functional rather than decorative.
+- Avoid stereotypical Indian motifs, flags, and excessive cultural imagery.
+- The logo should be a simple, distinctive wordmark reading **rozgar**, preferably lowercase.
+
+## 3. Main Dashboard
+
+Make the dashboard the primary screen after users enter the app.
+
+### Header
+
+Include:
+- Rozgar wordmark on the left.
+- Current date displayed clearly.
+- A small profile avatar or profile icon on the right.
+- A simple greeting such as “A new day, a fresh start.”
+- A short supporting line such as “Small steps. Steady progress.”
+
+The header should be compact and uncluttered.
+
+### Today's habits
+
+Display a clear heading: “Today's habits”.
+
+Show a list of habit rows or restrained cards. Each item should include:
+- Habit name.
+- A small icon.
+- Optional scheduled time.
+- A clear completion checkbox or circular check button.
+- Completed and incomplete visual states.
+
+Example habits:
+- Study for 45 minutes.
+- Read for 15 minutes.
+- Exercise for 20 minutes.
+- Drink enough water.
+- Practice meditation.
+
+Completed habits should look subtly different, using a blue checkmark and muted text without making the entire item disappear.
+
+Allow users to mark a habit complete with one click and undo the action if needed.
+
+### Daily progress
+
+Include a compact progress section showing:
+- Number of habits completed today.
+- Total habits scheduled today.
+- A progress bar or circular progress indicator.
+
+Example: “3 of 5 habits completed”.
+
+Keep the progress visualization clear and motivating, not competitive.
+
+### Add a habit
+
+Include a prominent blue “+ Add habit” button.
+
+When clicked, open a clean modal or dedicated form with:
+- Habit name.
+- Optional description.
+- Frequency: daily or selected weekdays.
+- Optional reminder time.
+- Save and cancel buttons.
+
+Add basic frontend validation and useful error messages.
+
+### Weekly consistency
+
+Add a compact seven-day view showing the current week's progress.
+
+Display weekdays with subtle visual indicators for completed habits or overall daily completion. Include a simple weekly completion percentage.
+
+Do not introduce complicated charts, analytics dashboards, or multiple competing progress indicators.
+
+## 4. Missed-Habit Recovery
+
+This is an important differentiator for Rozgar.
+
+When a user misses a scheduled habit, do not use red warning screens, guilt-based messages, or negative language.
+
+Instead, display supportive copy such as:
+
+- “Missed a day? You can start again today.”
+- “One missed day doesn't erase your progress.”
+- “Let's make today count.”
+
+Include a clear action such as “Continue today” or “Try again”.
+
+Do not treat a missed day as a permanent failure. Avoid forcing users to maintain perfect streaks.
+
+## 5. Navigation
+
+For desktop, use a simple sidebar or compact top navigation with:
+
+- Dashboard
+- My Habits
+- Progress
+- Settings
+
+For mobile, use a compact bottom navigation bar with appropriate icons and labels.
+
+The Dashboard should remain the main focus. Avoid adding unnecessary pages or features.
+
+## 6. Additional Screens
+
+Build these screens with a consistent design system:
+
+### Welcome / onboarding
+- Rozgar wordmark.
+- Headline: “Build habits that fit your life.”
+- Supporting text: “Stay consistent, one day at a time.”
+- Primary CTA: “Get started”.
+- Secondary CTA: “I already have an account”.
+
+### Authentication
+- Sign-up and sign-in forms.
+- Email and password fields.
+- Password visibility toggle.
+- Form validation.
+- Clear loading, success, and error states.
+
+Build the frontend forms so they can be connected to a real authentication provider later. Do not pretend authentication is functional if no backend is connected.
+
+### My Habits
+- List all active habits.
+- Allow users to open, edit, pause, or delete a habit.
+- Provide an empty state when no habits exist.
+- Include a clear “Create your first habit” action.
+
+### Progress
+- Weekly completion overview.
+- Simple seven-day history.
+- Total check-ins.
+- Clear, readable summaries.
+- Avoid misleading statistics and fabricated historical data.
+
+### Settings
+- Profile information.
+- Reminder preferences.
+- Basic account settings.
+- A simple way to return to the dashboard.
+
+## 7. Interactions and Frontend Behavior
+
+The frontend should not be a static mockup.
+
+Implement:
+- Functional navigation between screens.
+- Interactive habit completion.
+- Add, edit, pause, and delete habit interactions.
+- Working form validation.
+- Modal open and close behavior.
+- Progress indicators that update when habits are completed or unchecked.
+- Empty states, loading states, and error states where appropriate.
+- A responsive mobile navigation experience.
+
+If the backend is not connected, use clearly separated mock data and temporary local state. Do not claim that data is permanently saved or synced across devices.
+
+Do not store passwords in local storage. Keep authentication separate from ordinary UI state.
+
+## 8. Technical Requirements
+
+- Use React with TypeScript.
+- Use Tailwind CSS or the project's existing styling system.
+- Use reusable components for buttons, habit items, forms, navigation, progress indicators, and modals.
+- Use Lucide icons where appropriate.
+- Keep components modular and maintainable.
+- Use semantic HTML and accessible labels.
+- Support keyboard navigation and visible focus states.
+- Ensure good contrast and readable typography.
+- Design for mobile, tablet, and desktop.
+- Use sensible loading and error states.
+- Avoid unnecessary dependencies.
+- Preserve the existing project configuration if Replit has already created a working project.
+- Do not introduce a second application framework or duplicate routing system.
+
+## 9. Important Constraints
+
+- Build the frontend first.
+- Do not invent backend endpoints or assume a database is connected.
+- Do not add AI coaching, social feeds, leaderboards, wearable integrations, or subscription screens.
+- Do not overload the dashboard with cards.
+- Do not make the app feel like a generic admin dashboard.
+- Do not use excessive animations or gamification.
+- Keep the primary user action—checking off today's habits—fast and obvious.
+- Do not replace working code unnecessarily.
+
+## 10. Final Quality Check
+
+Before finishing:
+
+1. Verify that all screens are accessible through working navigation.
+2. Verify that buttons and forms perform their intended frontend actions.
+3. Verify that habit completion updates the daily progress indicators.
+4. Verify that the layout works on mobile and desktop.
+5. Verify that empty states and validation errors look intentional.
+6. Verify that the blue, white, black, and neutral color palette is consistent.
+7. Clearly identify any feature that still needs a backend connection.
+
+**Deliverable:** A polished, functional frontend prototype of Rozgar that feels like a real, launch-ready Indian productivity startup—not a generic template. Prioritize clarity, usability, consistency, and a calm visual identity.
