@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+@layer theme, base, clerk, components, utilities;
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
@@ -981,3 +982,18 @@ h1, h2, h3, p { margin-top: 0; }
 .settings-section, .welcome-card, .auth-panel { box-shadow: none; }
 .dialog { box-shadow: 0 14px 40px rgba(0, 0, 0, .36); }
 .visual-circle { display: none; }
+
+/* Clerk account forms inherit Rozgar's dark palette and existing font system. */
+.clerk-root { width: 100%; }
+.clerk-card-box { width: 100%; max-width: 100%; }
+.clerk-card,
+.clerk-footer { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+.clerk-title { color: var(--ink) !important; font-family: var(--display) !important; }
+.clerk-muted,
+.clerk-label { color: var(--muted-copy) !important; }
+.clerk-input { background: var(--surface-secondary) !important; border-color: var(--line) !important; color: var(--ink) !important; }
+.clerk-submit { background: var(--blue) !important; color: #fff !important; }
+.clerk-social { background: var(--surface-elevated) !important; border-color: var(--line) !important; }
+.clerk-social-copy { color: var(--ink) !important; }
+.clerk-link { color: var(--blue-hover) !important; }
+.clerk-alert { color: var(--error) !important; }

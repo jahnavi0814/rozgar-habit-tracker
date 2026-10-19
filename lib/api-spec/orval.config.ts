@@ -68,7 +68,9 @@ export default defineConfig({
             response: ['bigint', 'date'],
           },
         },
-        useDates: true,
+        // Date-only fields represent user-local calendar days and must remain
+        // YYYY-MM-DD strings across the API boundary.
+        useDates: false,
         useBigInt: true,
       },
     },
