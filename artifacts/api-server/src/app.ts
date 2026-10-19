@@ -14,6 +14,8 @@ import {
   clerkProxyMiddleware,
   getClerkProxyHost,
 } from "./middlewares/clerkProxyMiddleware";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const app: Express = express();
 
